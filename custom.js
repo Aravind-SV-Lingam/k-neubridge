@@ -435,41 +435,6 @@ function init_template() {
         }
     }
 
-    //Page Highlights
-    function highlightColors(){
-        var highlightData = document.querySelectorAll('[data-change-highlight]');
-        highlightData.forEach(el => el.addEventListener('click', e =>{
-            const activeHighlight = document.querySelectorAll('.highlight-active');
-            for(let i=0; i < activeHighlight.length; i++){activeHighlight[i].classList.remove('highlight-active');}
-            el.classList.add('highlight-active');
-            var highlight = el.getAttribute('data-change-highlight');
-            var pageHighlight = document.querySelectorAll('.page-highlight');
-            if(pageHighlight.length){pageHighlight.forEach(function(e){e.remove();});}
-            var loadHighlight = document.createElement("link");
-            loadHighlight.rel = "stylesheet";
-            loadHighlight.className = "page-highlight";
-            loadHighlight.type = "text/css";
-            loadHighlight.href = 'styles/highlights/highlight_' + highlight +'.css';
-            document.getElementsByTagName("head")[0].appendChild(loadHighlight);
-            document.body.setAttribute('data-highlight', 'highlight-'+highlight)
-            localStorage.setItem(pwaName+'-Highlight', highlight)
-        }))
-        var rememberHighlight = localStorage.getItem(pwaName+'-Highlight');
-        if(rememberHighlight){
-            var loadHighlight = document.createElement("link");
-            loadHighlight.rel = "stylesheet";
-            loadHighlight.className = "page-highlight";
-            loadHighlight.type = "text/css";
-            loadHighlight.href = 'styles/highlights/highlight_' + rememberHighlight +'.css';
-            if(!document.querySelectorAll('.page-highlight').length){
-                document.getElementsByTagName("head")[0].appendChild(loadHighlight);
-                document.body.setAttribute('data-highlight', 'highlight-'+rememberHighlight)
-            }
-        }
-    }
-    highlightColors();
-
-
     //Background Gradient Color
     var gradientData = document.querySelectorAll('[data-change-background]');
     gradientData.forEach(el => el.addEventListener('click',e =>{
@@ -1259,7 +1224,6 @@ function init_template() {
                     checkDarkMode();
                     activateMenus();
                     shareLinks();
-                    highlightColors();
                     selectHighlight();
                     card_extender();
                     backUp();
